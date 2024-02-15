@@ -1,4 +1,4 @@
-import express from "express"
+
 import { Request, Response } from "express"
 import  User  from "./user.model"
 export async function getUser(req: Request, res: Response) {
