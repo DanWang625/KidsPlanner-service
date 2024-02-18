@@ -12,7 +12,8 @@ export async function getReward(req: Request, res: Response) {
 
 export async function getRewards(req: Request, res: Response) {
     try {
-
+      const rewards = await Reward.find()
+      res.send(rewards)
     } catch (err) {
       res.send(err)
     }

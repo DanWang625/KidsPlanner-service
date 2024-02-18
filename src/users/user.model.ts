@@ -17,7 +17,7 @@ const UserSchema = new Schema({
         type: [String],
     },
     points: {
-        type: [Number],
+        type: Number,
     }
 }, {
     timestamps: true

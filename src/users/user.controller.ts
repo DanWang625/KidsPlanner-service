@@ -13,11 +13,7 @@ export async function getUser(req: Request, res: Response) {
 
 export async function getUsers(req: Request, res: Response) {
   try {
-    const users = await User.find({
-      name: {
-        $regex: req.query.name ?? null
-      }
-    })
+    const users = await User.find()
     res.send(users)
   } catch (err) {
     res.status(500).send(err)
