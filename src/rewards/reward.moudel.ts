@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
 
 const RewardSchema = new Schema({
-    name: {
+    title: {
         type: String,
         require: true,
     },
