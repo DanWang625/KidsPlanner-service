@@ -9,12 +9,17 @@ const UserSchema = new Schema({
         type: Number,
         require: true,
     },
-    tasks: {
-        type: [String],
+    password: {
+        type: String,
         require: true,
     },
+    tasks: {
+        type: Types.ObjectId,
+        ref: 'tasks',
+    },
     rewards: {
-        type: [String],
+        type: Types.ObjectId,
+        ref: 'rewards',
     },
     points: {
         type: Number,
