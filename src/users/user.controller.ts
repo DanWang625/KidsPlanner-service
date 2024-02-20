@@ -1,6 +1,8 @@
 
 import { Request, Response } from "express"
 import  User  from "./user.model"
+import bcrypt from 'bcrypt'
+
 export async function getUser(req: Request, res: Response) {
     try {
         const user = await User.findById({_id: req.params.id})
@@ -22,10 +24,17 @@ export async function getUsers(req: Request, res: Response) {
 
   export async function createUser(req: Request, res: Response) {
     try {
-      const { name, age, tasks, rewards, points } = req.body
-      const user = new User({ name, age, tasks, rewards, points })
+      const hashPassword = await bcrypt.hash(req.body.password, 39)
+      const user = new User({
+        name: req.body.name,
+        age: req.body.age,
+        password: hashPassword,
+        tasks: req.body.tasks,
+        rewards: req.body.rewards,
+        points: req.body.points
+      })
       await user.save()
-      res.send(user)
+      res.send({ "Congrates! You've create your account successfully!": user })
     } catch (err) {
       res.send({ err })
     }
