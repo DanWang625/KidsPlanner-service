@@ -24,14 +24,15 @@ export async function getUsers(req: Request, res: Response) {
 
   export async function createUser(req: Request, res: Response) {
     try {
-      const hashPassword = await bcrypt.hash(req.body.password, 39)
+      const { name, age, password, tasks, rewards, points } = req.body
+      const hashPassword = await bcrypt.hash(password, 10)
       const user = new User({
-        name: req.body.name,
-        age: req.body.age,
+        name: name,
+        age: age,
         password: hashPassword,
-        tasks: req.body.tasks,
-        rewards: req.body.rewards,
-        points: req.body.points
+        tasks: tasks,
+        rewards: rewards,
+        points: points
       })
       await user.save()
       res.send({ "Congrates! You've create your account successfully!": user })
