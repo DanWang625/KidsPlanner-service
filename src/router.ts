@@ -42,7 +42,7 @@ router.use((req, res, next) => {
     .get(getUsers)
     .post(createUser)
 
-  router.route('users/:id')
+  router.route('/users/:id')
     .get(getUser)
     .put(updateUser)
     .delete(deleteUser)
