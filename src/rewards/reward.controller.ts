@@ -2,8 +2,8 @@ import { Request, Response } from "express"
 import  Reward  from "./reward.moudel"
 export async function getReward(req: Request, res: Response) {
     try {
-        const user = await Reward.findById( {_id: req.params.id} )
-        res.send({ user })
+        const reward = await Reward.findById( {_id: req.params.id} )
+        res.send({ reward})
 
     } catch (error) {
         res.send({ error })

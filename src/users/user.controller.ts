@@ -45,7 +45,7 @@ export async function getUsers(req: Request, res: Response) {
     try {
       const updates = req.body
       const mongooseResponse = await User.updateOne({ _id: req.params.id}, updates)
-      res.send(mongooseResponse)
+      res.send({ "user was successfully updated": mongooseResponse })
     } catch (err) {
       res.status(500).send(err)
     }
@@ -59,7 +59,7 @@ export async function getUsers(req: Request, res: Response) {
     try {
       const userId = req.params.id
       const mongooseResponse = await User.deleteOne({ _id: userId})
-      res.send(mongooseResponse)
+      res.send({ "user was successfully deleted": mongooseResponse })
     } catch (err) {
       res.status(500).send(err)
     }
