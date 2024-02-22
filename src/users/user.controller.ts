@@ -25,6 +25,10 @@ export async function getUsers(req: Request, res: Response) {
   export async function createUser(req: Request, res: Response) {
     try {
       const { name, age, password, tasks, rewards, points } = req.body
+      const exsitingUser = await User.findOne({ name: name })
+      if (exsitingUser) {
+        return res.status(400).send("user already exists, please use another name")
+      }
       const hashPassword = await bcrypt.hash(password, 10)
       const user = new User({
         name: name,
@@ -62,5 +66,24 @@ export async function getUsers(req: Request, res: Response) {
       res.send({ "user was successfully deleted": mongooseResponse })
     } catch (err) {
       res.status(500).send(err)
+    }
+  }
+
+  export async function loginUser(req: Request, res: Response) {
+    try {
+      const { name, password } = req.body
+      const user = await User.findOne({ name: name })
+      if (!user) {
+        return res.status(404).send({ success: false, message: "User not found" })
+      }
+      if (typeof user.password === "string") {
+        const passwordMatch = await bcrypt.compare(password, user.password)
+        if (!passwordMatch) {
+          return res.status(401).send("sorry, invalid name or password, please try again")
+        }
+        return res.status(200).send({ "You successfully logged in": user })
+      }
+    } catch (err) {
+      res.status(500).send({ "An error occured": err })
     }
   }
