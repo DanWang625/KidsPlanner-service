@@ -2,11 +2,11 @@ import express from 'express'
 
 import {
   getUser,
-  // getUsersWithTasks,
-  createUser,
+  registerUser,
   updateUser,
   deleteUser,
   getUsers,
+  loginUser,
 } from './users/user.controller'
 
 import {
@@ -39,9 +39,11 @@ router.use((req, res, next) => {
   })
 
   // User routes
-  router.route('/users')
-    .get(getUsers)
-    .post(createUser)
+  router.route('/register').post(registerUser)
+
+  router.route('/login').post(loginUser)
+
+  router.route('/users').get(getUsers)
 
   router.route('/users/:id')
     .get(getUser)

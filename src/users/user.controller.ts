@@ -22,29 +22,6 @@ export async function getUsers(req: Request, res: Response) {
   }
   }
 
-  export async function createUser(req: Request, res: Response) {
-    try {
-      const { name, age, password, tasks, rewards, points } = req.body
-      const exsitingUser = await User.findOne({ name: name })
-      if (exsitingUser) {
-        return res.status(400).send("user already exists, please use another name")
-      }
-      const hashPassword = await bcrypt.hash(password, 10)
-      const user = new User({
-        name: name,
-        age: age,
-        password: hashPassword,
-        tasks: tasks,
-        rewards: rewards,
-        points: points
-      })
-      await user.save()
-      res.send({ "Congrates! You've create your account successfully!": user })
-    } catch (err) {
-      res.send({ err })
-    }
-  }
-
   export async function updateUser(req: Request, res: Response) {
     try {
       const updates = req.body
@@ -85,5 +62,28 @@ export async function getUsers(req: Request, res: Response) {
       }
     } catch (err) {
       res.status(500).send({ "An error occured": err })
+    }
+  }
+
+ export async function registerUser(req: Request, res: Response) {
+    try {
+      const { name, age, password, tasks, rewards, points } = req.body
+      const exsitingUser = await User.findOne({ name: name })
+      if (exsitingUser) {
+        return res.status(400).send("user already exists, please use another name")
+      }
+      const hashPassword = await bcrypt.hash(password, 10)
+      const user = new User({
+        name: name,
+        age: age,
+        password: hashPassword,
+        tasks: tasks,
+        rewards: rewards,
+        points: points
+      })
+      await user.save()
+      res.send({ "Congrates! You've create your account successfully!": user })
+    } catch (err) {
+      res.send({ err })
     }
   }
