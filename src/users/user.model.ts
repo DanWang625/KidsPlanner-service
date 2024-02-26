@@ -1,4 +1,4 @@
-import { model, Schema, Types } from 'mongoose'
+import { model, Schema } from 'mongoose'
 
 const UserSchema = new Schema({
     name: {
@@ -12,14 +12,6 @@ const UserSchema = new Schema({
     password: {
         type: String,
         require: true,
-    },
-    tasks: {
-        type: Types.ObjectId,
-        ref: 'tasks',
-    },
-    rewards: {
-        type: Types.ObjectId,
-        ref: 'rewards',
     },
     points: {
         type: Number,

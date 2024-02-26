@@ -2,7 +2,7 @@ import { Request, Response } from "express"
 import  Reward  from "./reward.moudel"
 export async function getReward(req: Request, res: Response) {
     try {
-        const reward = await Reward.findById( {_id: req.params.id} )
+        const reward = await Reward.findById(req.params.id).populate('user')
         res.send({ reward})
 
     } catch (error) {

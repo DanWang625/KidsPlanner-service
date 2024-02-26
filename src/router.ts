@@ -2,10 +2,11 @@ import express from 'express'
 
 import {
   getUser,
-  getUsers,
+  // getUsersWithTasks,
   createUser,
   updateUser,
   deleteUser,
+  getUsers,
 } from './users/user.controller'
 
 import {

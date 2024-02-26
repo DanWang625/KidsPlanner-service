@@ -2,8 +2,8 @@ import { Request, Response } from "express"
 import  Task  from "./task.moudel"
 export async function getTask(req: Request, res: Response) {
     try {
-        const user = await Task.findById({_id: req.params.id})
-        res.send({ user })
+        const task = await Task.findById(req.params.id).populate('user')
+        res.send({ TaskDetail: task })
 
     } catch (error) {
         res.send({ error })

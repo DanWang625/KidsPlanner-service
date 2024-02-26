@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, Types, model } from "mongoose";
 
 const RewardSchema = new Schema({
     title: {
@@ -13,6 +13,11 @@ const RewardSchema = new Schema({
     costs: {
         type: Number,
         require: true,
+    },
+    user: {
+        type: Types.ObjectId,
+        ref: "User",
+        require: true
     }
 }, {
     timestamps: true

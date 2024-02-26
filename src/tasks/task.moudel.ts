@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Types } from "mongoose";
 
 
 const TaskSchema = new Schema({
@@ -18,6 +18,11 @@ const TaskSchema = new Schema({
     points: {
         type: Number,
         require: true,
+    },
+    user: {
+        type: Types.ObjectId,
+        ref: "User",
+        require: true
     }
 }, {
     timestamps: true
