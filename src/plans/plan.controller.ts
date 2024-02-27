@@ -2,7 +2,7 @@ import { Request, Response } from "express"
 import  Plan  from "./plan.model"
 export async function getPlan(req: Request, res: Response) {
     try {
-        const plan = await Plan.findById(req.params.id).populate('user')
+        const plan = await Plan.findById(req.params.id)
         res.send({ plan})
 
     } catch (error) {
@@ -21,8 +21,8 @@ export async function getPlans(req: Request, res: Response) {
 
   export async function createPlan(req: Request, res: Response) {
     try {
-      const { name, description, costs } = req.body
-      const plan = new Plan({ name, description, costs })
+      const { title, description, tasks } = req.body
+      const plan = new Plan({ title, description, tasks })
       await plan.save()
       res.send({ "successfully created a plan": plan })
     } catch (err) {

@@ -15,9 +15,6 @@ const UserSchema = new Schema({
         require: true,
         unique: true
 
-    },
-    points: {
-        type: Number,
     }
 }, {
     timestamps: true
