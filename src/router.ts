@@ -63,21 +63,21 @@ router.use((req, res, next) => {
     .delete(deleteUser)
 
   // Plan routes
-  router.route('/plans')
+  router.route('/users/:userId/plans')
     .get(getPlans)
     .post(createPlan)
 
-  router.route('plans/:planId')
+  router.route('/users/:userId/plans/:id')
     .get(getPlan)
     .put(updatePlan)
     .delete(deletePlan);
 
   // Notification routes
-  router.route('users/:id/notifications')
+  router.route('/users/:userId/notifications')
     .get(getNotifications)
     .post(createNotification)
 
-  router.route('users/:id/notifications/:notificationId')
+  router.route('/users/:userId/notifications/:id')
     .get(getNotification)
     .put(updateNotification)
     .delete(deleteNotification);
