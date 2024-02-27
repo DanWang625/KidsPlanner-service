@@ -8,7 +8,7 @@ const NotificationSchema = new Schema({
     },
     message: {
         type: String,
-        required: true
+        require: true
     }
 }, {
     timestamps: true

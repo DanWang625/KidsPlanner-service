@@ -11,9 +11,13 @@ const PlanSchema = new Schema({
         require: true,
     },
     tasks: [{
-        title: { type: String, required: true },
+        title: { type: String, require: true },
         description: { type: String },
-        completed: { type: Boolean, default: false }
+        status: {
+            type: String,
+            enum: ['Not Started', 'In Progress', 'Finished'],
+            require: true,
+        },
       }],
 }, {
     timestamps: true

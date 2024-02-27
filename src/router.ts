@@ -35,7 +35,8 @@ import {
   getNotification,
   getNotifications,
   createNotification,
-  deleteNotification
+  deleteNotification,
+  updateNotification
 } from './notifications/notification.controller'
 
 const router = express.Router()
@@ -61,44 +62,24 @@ router.use((req, res, next) => {
     .put(updateUser)
     .delete(deleteUser)
 
-  // // Task routes
-  // router.route('/tasks')
-  //   .get(getTasks)
-  //   .post(createTask)
-
-  // router.route('/tasks/:id')
-  //   .get(getTask)
-  //   .put(updateTask)
-  //   .delete(deleteTask)
-
-  // Reward routes
-  // router.route('/rewards')
-  //   .get(getRewards)
-  //   .post(createReward)
-
-  // router.route('/rewards/:id')
-  //   .get(getReward)
-  //   .put(updateReward)
-  //   .delete(deleteReward)
-
   // Plan routes
   router.route('/plans')
     .get(getPlans)
     .post(createPlan)
 
-  router.route('/plans/:id')
+  router.route('plans/:planId')
     .get(getPlan)
     .put(updatePlan)
     .delete(deletePlan);
 
   // Notification routes
-  router.route('/notifications')
+  router.route('users/:id/notifications')
     .get(getNotifications)
     .post(createNotification)
 
-  router.route('/notifications/:id')
+  router.route('users/:id/notifications/:notificationId')
     .get(getNotification)
-    .put(createNotification)
+    .put(updateNotification)
     .delete(deleteNotification);
 
 
