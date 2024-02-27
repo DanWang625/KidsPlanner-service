@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import  Reward  from "./reward.moudel"
+import  Reward  from "./reward.model"
 export async function getReward(req: Request, res: Response) {
     try {
         const reward = await Reward.findById(req.params.id).populate('user')
