@@ -12,7 +12,7 @@ export async function getNotification(req: Request, res: Response) {
 
 export async function getNotifications(req: Request, res: Response) {
     try {
-      const notifications = await Notification.find()
+      const notifications = await Notification.find().populate('user')
       res.send(notifications)
     } catch (err) {
       res.send(err)
@@ -21,8 +21,8 @@ export async function getNotifications(req: Request, res: Response) {
 
   export async function createNotification(req: Request, res: Response) {
     try {
-      const { message } = req.body
-      const notification = new Notification({ message })
+      const { message, userId } = req.body
+      const notification = new Notification({ message, user: userId})
       await notification.save()
       res.send({ "successfully created a notification": notification })
     } catch (err) {

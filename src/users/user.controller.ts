@@ -67,7 +67,7 @@ export async function getUsers(req: Request, res: Response) {
 
  export async function registerUser(req: Request, res: Response) {
     try {
-      const { name, age, password, tasks, rewards, points } = req.body
+      const { name, age, password } = req.body
       const exsitingUser = await User.findOne({ name: name })
       if (exsitingUser) {
         return res.status(400).send("user already exists, please use another name")
@@ -76,10 +76,7 @@ export async function getUsers(req: Request, res: Response) {
       const user = new User({
         name: name,
         age: age,
-        password: hashPassword,
-        tasks: tasks,
-        rewards: rewards,
-        points: points
+        password: hashPassword
       })
       await user.save()
       res.send({ "Congrates! You've create your account successfully!": user })
