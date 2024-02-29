@@ -19,6 +19,11 @@ const PlanSchema = new Schema({
             require: true,
         },
       }],
+      user: {
+        type: Types.ObjectId,
+        ref: "User",
+        require: true
+    }
 }, {
     timestamps: true
 })

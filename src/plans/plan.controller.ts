@@ -12,7 +12,7 @@ export async function getPlan(req: Request, res: Response) {
 
 export async function getPlans(req: Request, res: Response) {
     try {
-      const plans = await Plan.find()
+      const plans = await Plan.find().populate('user')
       res.send(plans)
     } catch (err) {
       res.send(err)
@@ -21,8 +21,8 @@ export async function getPlans(req: Request, res: Response) {
 
   export async function createPlan(req: Request, res: Response) {
     try {
-      const { title, description, tasks } = req.body
-      const plan = new Plan({ title, description, tasks })
+      const { title, description, tasks, userId } = req.body
+      const plan = new Plan({ title, description, tasks, user: userId })
       await plan.save()
       res.send({ "successfully created a plan": plan })
     } catch (err) {
