@@ -1,6 +1,8 @@
 
 import { Request, Response } from "express"
 import  User  from "./user.model"
+import Plan from "../plans/plan.model"
+import Notification from "../notifications/notification.model"
 import bcrypt from 'bcrypt'
 
 export async function getUser(req: Request, res: Response) {
@@ -39,7 +41,9 @@ export async function getUsers(req: Request, res: Response) {
   export async function deleteUser(req: Request, res: Response) {
     try {
       const userId = req.params.id
-      const mongooseResponse = await User.deleteOne({ _id: userId})
+      const mongooseResponse = await User.deleteOne({ _id: userId })
+      const mongoosePlans = await Plan.deleteMany({ user: userId })
+      const mongooseNotificatons = await Notification.deleteMany({ user: userId })
       res.send({ "user was successfully deleted": mongooseResponse })
     } catch (err) {
       res.status(500).send(err)
