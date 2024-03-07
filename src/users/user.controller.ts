@@ -44,7 +44,7 @@ export async function getUsers(req: Request, res: Response) {
       const mongooseResponse = await User.deleteOne({ _id: userId })
       const mongoosePlans = await Plan.deleteMany({ user: userId })
       const mongooseNotificatons = await Notification.deleteMany({ user: userId })
-      res.send({ "user was successfully deleted": mongooseResponse })
+      res.send({ "all user infos was successfully deleted": mongooseResponse, mongoosePlans, mongooseNotificatons })
     } catch (err) {
       res.status(500).send(err)
     }
